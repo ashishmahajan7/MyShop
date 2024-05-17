@@ -41,5 +41,4 @@ public class ProductController {
 		Optional<Product> product = productService.getProduct(id);
 		return product;
 	}
-
 }
