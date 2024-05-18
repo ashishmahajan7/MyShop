@@ -12,7 +12,13 @@ public interface ProductService {
 	
 	public List<Product> getAllProducts();
 	
-	public Optional<Product> getProduct(Integer id) ;
+	public Optional<Product> getProduct(Integer id);
+	
+	public void deleteProduct(int id);
+	
+	public Product updateAllInformationOfProduct(int id , Product product);
+	
+	public Product updateSpecifiedInformation(int id , Product product);
 	
 
 }

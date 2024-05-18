@@ -33,4 +33,56 @@ public class ProductServiceImpl implements ProductService{
 		return product1;
 	}
 
+	@Override
+	public void deleteProduct(int id) {
+		 productRepository.deleteById(id);
+	}
+
+	@Override
+	public Product updateAllInformationOfProduct(int id, Product updatedProduct) {
+		Optional<Product> oldProduct = productRepository.findById(id);
+	
+		if(oldProduct.isPresent()) {
+			Product product = oldProduct.get();
+			product.setProductId(updatedProduct.getProductId());
+			product.setProductName(updatedProduct.getProductName());
+			product.setAvailableQuantity(updatedProduct.getAvailableQuantity());
+			product.setProductDiscription(updatedProduct.getProductDiscription());
+//			product.setPrice(updatedProduct.getPrice());
+			return productRepository.save(product);
+		}
+		else {
+			throw new RuntimeException("Product not Found");
+		}
+		
+	}
+
+	@Override
+	public Product updateSpecifiedInformation(int id, Product updatedProduct) {
+		Optional<Product> oldProduct = productRepository.findById(id);
+		
+		if(oldProduct.isPresent()) {
+			Product product = oldProduct.get();
+			if(updatedProduct.getProductId() != 0) {
+				product.setProductId(updatedProduct.getProductId());
+			}
+			if(updatedProduct.getProductName() != null) {
+				product.setProductName(updatedProduct.getProductName());
+			}
+			if(updatedProduct.getProductDiscription() != null) {
+				product.setProductDiscription(updatedProduct.getProductDiscription());
+			}
+			if(updatedProduct.getAvailableQuantity() != 0) {
+				product.setAvailableQuantity(updatedProduct.getAvailableQuantity());
+			}
+			if(updatedProduct.getPrice() != 0) {
+				product.setPrice(updatedProduct.getPrice());
+			}
+			return productRepository.save(product);
+		}
+		else {
+			throw new RuntimeException("Product not found");
+		}
+	}
+
 }
